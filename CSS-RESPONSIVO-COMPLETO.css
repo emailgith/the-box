@@ -1,0 +1,634 @@
+/* ============================================
+   RESPONSIVE DESIGN - Mobile First Approach
+   ============================================ */
+
+/* Cores e variáveis */
+:root {
+  --primary: #c8102e;
+  --ok: #16a34a;
+  --warn: #eab308;
+  --error: #c8102e;
+  --accent: #c8102e;
+  --muted: #888;
+  --bg: #1a1a1a;
+  --surface: #2a2a2a;
+  --border: #444;
+  --text: #fff;
+  --text-muted: #ccc;
+  
+  /* Breakpoints como variáveis */
+  --mobile: 480px;
+  --tablet: 768px;
+  --desktop: 1024px;
+  --wide: 1200px;
+}
+
+/* ============================================
+   MOBILE FIRST (Default)
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px; /* Evita zoom em inputs em iOS */
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.container {
+  width: 100%;
+  padding: 0 12px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+/* Grid - Mobile: 1 coluna */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Buttons - Touch-friendly (mínimo 44x44px) */
+button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 16px;
+  font-size: 16px; /* Evita zoom iOS */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  width: 100%; /* Full width em mobile */
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Inputs - Mobile friendly */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px; /* Evita zoom iOS */
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(200,16,46,0.1);
+}
+
+/* Header - Stack em mobile */
+header {
+  background: var(--surface);
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Menu - Mobile */
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+nav button {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+/* List - Stack em mobile */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list-item {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Modal - Full screen em mobile */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: flex-end; /* Bottom sheet style */
+  z-index: 1000;
+  padding: 0;
+}
+
+.modal-content {
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border-radius: 12px 12px 0 0;
+  padding: 20px;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* Form layout - Stack em mobile */
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Utility classes */
+.small {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+}
+
+.link {
+  background: none;
+  border: none;
+  color: var(--primary);
+  padding: 0;
+  min-height: auto;
+  width: auto;
+  text-decoration: underline;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+/* ============================================
+   TABLET (768px+)
+   ============================================ */
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .card {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  /* Grid - 2 colunas em tablet */
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  button {
+    width: auto; /* Não preencher em tablet */
+  }
+
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header h1 {
+    margin: 0;
+    flex: 1;
+  }
+
+  /* Menu horizontal em tablet */
+  nav {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  nav button {
+    width: auto;
+    text-align: center;
+    padding: 8px 16px;
+  }
+
+  /* Modal - Centered em tablet */
+  .modal {
+    align-items: center;
+    padding: 20px;
+  }
+
+  .modal-content {
+    width: auto;
+    max-width: 500px;
+    border-radius: 12px;
+    max-height: 90vh;
+  }
+
+  /* Tabela responsiva */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  thead {
+    background: rgba(255,255,255,0.05);
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+/* ============================================
+   DESKTOP (1024px+)
+   ============================================ */
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  /* Grid - 3 colunas em desktop */
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  /* Main layout - Sidebar */
+  main {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+  }
+
+  sidebar {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+  }
+
+  /* Menu vertical em sidebar */
+  nav {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  nav button {
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  /* Modal - Janela normal */
+  .modal-content {
+    max-width: 600px;
+    max-height: 80vh;
+  }
+
+  /* Scroll horizontal para tabelas grandes */
+  .table-wrapper {
+    overflow-x: auto;
+  }
+}
+
+/* ============================================
+   WIDE (1200px+)
+   ============================================ */
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+
+  main {
+    grid-template-columns: 280px 1fr 300px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   LANDSCAPE MOBILE
+   ============================================ */
+
+@media (max-height: 600px) and (orientation: landscape) {
+  header {
+    padding: 8px 16px;
+  }
+
+  header h1 {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+
+  button {
+    min-height: 36px;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  input {
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Modo contraste alto */
+@media (prefers-contrast: more) {
+  :root {
+    --border: #888;
+  }
+
+  button {
+    border: 2px solid var(--primary);
+  }
+}
+
+/* Modo escuro/claro */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f5f5f5;
+    --surface: #ffffff;
+    --border: #ddd;
+    --text: #000;
+    --text-muted: #666;
+  }
+
+  input {
+    background: rgba(0,0,0,0.05);
+    color: #000;
+    border-color: #ddd;
+  }
+}
+
+/* Reduzir animações */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================
+   ORIENTAÇÃO
+   ============================================ */
+
+/* Portrait mode */
+@media (orientation: portrait) {
+  body {
+    max-width: 100%;
+  }
+}
+
+/* Landscape mode */
+@media (orientation: landscape) {
+  body {
+    max-height: 100vh;
+    overflow: auto;
+  }
+}
+
+/* ============================================
+   TOUCH DEVICES
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Aumentar áreas clicáveis */
+  button {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Remover hover effects */
+  button:hover {
+    background: inherit;
+  }
+
+  /* Feedback em touch */
+  button:active {
+    opacity: 0.8;
+  }
+}
+
+/* ============================================
+   PRINT
+   ============================================ */
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  button,
+  nav {
+    display: none;
+  }
+
+  .card {
+    page-break-inside: avoid;
+    border: 1px solid #ccc;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* ============================================
+   TIPOGRAFIA RESPONSIVA
+   ============================================ */
+
+h1 {
+  font-size: clamp(24px, 5vw, 48px);
+  margin: 0 0 16px 0;
+}
+
+h2 {
+  font-size: clamp(20px, 4vw, 36px);
+  margin: 0 0 12px 0;
+}
+
+h3 {
+  font-size: clamp(18px, 3vw, 28px);
+  margin: 0 0 10px 0;
+}
+
+body {
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+/* ============================================
+   SHADOWS RESPONSIVOS
+   ============================================ */
+
+.card,
+button {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 1024px) {
+  .card {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+}
+
+/* ============================================
+   FLEXBOX UTILITIES
+   ============================================ */
+
+.flex {
+  display: flex;
+  gap: 12px;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .flex-tablet-row {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .flex-desktop-row {
+    flex-direction: row;
+  }
+}
+
+/* ============================================
+   OVERFLOW HANDLING
+   ============================================ */
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* ============================================
+   SCROLL BEHAVIOR
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll bar customizado */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
